@@ -9,11 +9,13 @@ const checkAuth = require('../auth/checkAuthentication');
 
 /* GET the homepage. */
 router.get('/', checkAuth, (req, res, next) => {
-    res.render('../Views/homepage.ejs', {
-        title: 'HomePage',
+    res.render('../Views/post.ejs', {
+        title: 'New Post',
         user: req.session.user.username,
         // user: req.session.user || null,
     });
 });
+
+//todo implement add new contents 
 
 module.exports = router;
