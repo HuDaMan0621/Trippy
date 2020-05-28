@@ -1,0 +1,3 @@
+<% db.Users.findOne({ where: UserId = post.id })
+
+test
