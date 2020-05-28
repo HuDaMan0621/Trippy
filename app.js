@@ -82,5 +82,6 @@ app.get('/index', (req, res) => {
     // })
 })
 
+db.sequelize.sync();
 app.listen(PORT, () => console.log(`The Server is running on Http://localhost:${PORT}`));
 

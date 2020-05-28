@@ -16,6 +16,16 @@ router.get('/', checkAuth, (req, res, next) => {
     });
 });
 
+router.post('/new', (req, res, next) => {
+    db.Contents.create({
+        UserId: req.session.user.id,
+        title: req.body.title,
+        body: req.body.body,
+    }).then(() => {
+        res.redirect('/homepage');
+    })
+})
+
 //todo implement add new contents 
 
 module.exports = router;
