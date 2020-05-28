@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     lat_location: DataTypes.INTEGER,
     long_location: DataTypes.INTEGER,
     location: DataTypes.STRING,
-    date: DataTypes.DATE
+    date: DataTypes.DATE,
+    title:DataTypes.STRING
   }, {});
   Contents.associate = function(models) {
     Contents.belongsTo(models.User)    

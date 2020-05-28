@@ -4,39 +4,83 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
 
-var route = express.Router();
+var router = express.Router();
 
 const bcrypt = require('bcrypt');
-const app = express ();
+const app = express();
 
 const db = require('./models');
 
-// const indexRouter = require('./routes/index');
-// const usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
 const PORT = process.env.PORT || 3000;
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// app.use('/users', usersRouter);
-// app.set('view engine', 'ejs');
+app.use(
+    session({
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            // secure: true, 
+        maxAge: 6000000,
+    }
+}));
 
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+function checkAuthentication(req, res, next) {
+    if (req.session.user) {
+      next();
+    } else {
+      res.redirect('/users/login');
+    }
+  }
+  
+app.get('/dashboard', checkAuthentication, (req, res) => {
+    req.send('WELCOME TO THE DASHBOARD!!');
+})
+//users
+// app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-var ExifImage = require('exif').ExifImage;
- 
-try {
-    new ExifImage({ image : './img/cathedral.jpg' }, function (error, exifData) {
-        if (error)
-            console.log('Error: '+error.message);
-        else
-            console.log(exifData); // Do something with your data!
+// app.get('/index')
+/* GET users listing. */
+router.get('/', function (req, res, next) {
+    res.send('users.ejs');
+  });
+  
+  router.post('/', (req, res) => {
+    const { username, email, password } = req.body;
+  
+    bcrypt.hash(password, 10, (err, hash) => {
+  
+      db.User.create({
+        username,
+        email,
+        password: hash,
+      }).then((result) => {
+        res.redirect('/users')
+      });
     });
-} catch (error) {
-    console.log('Error: ' + error.message);
-}
+  });
+//   module.exports = router;
+  
 
-db.sequelize.sync();
-app.listen(PORT, () => console.log(`The Godly Server is running on http://localhost${PORT}`));
+//routes
+app.get('/index', (req, res) => {
+    res.send('Hello@@@@');
+    // res.json(result);
+    // db.Artist.findAll().then((result) => {
+    //     res.json(result);
+    // })
+})
+
+app.listen(PORT, () => console.log(`The Server is running on Http://localhost:${PORT}`));
+
