@@ -9,11 +9,22 @@ const checkAuth = require('../auth/checkAuthentication');
 
 /* GET the homepage. */
 router.get('/', checkAuth, (req, res, next) => {
-    res.render('../Views/homepage.ejs', {
-        title: 'HomePage',
-        user: req.session.user.username,
-        // user: req.session.user || null,
-    });
+    db.Contents.findAll().then(results => {
+        res.render('../Views/homepage.ejs', {
+            title: 'HomePage',
+            user: req.session.user.username,
+            posts: results,             
+        })
+    });  
+
+    
 });
+
+// router.get('/', function (req, res, next) {
+//     // res.send('hello');
+//     res.render('../views/homepage', {
+
+//             });
+// });
 
 module.exports = router;
