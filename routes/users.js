@@ -30,26 +30,26 @@ router.post('/', (req, res) => {
 
 //sign in
 router.post('/login', (req, res) => {
-    const { username, password } = req.body;
+  const { username, password } = req.body;
 
-    db.User.findOne({ where: { username }})
+  db.User.findOne({ where: { username } })
     .then(User => {
-        bcrypt.compare(password, User.password, (err, match) =>{
-            if (match) {
-              req.session.user = User;
-                res.redirect('/');
-          } else {
-              res.send('Incorrect Password');
-          }
-        });
+      bcrypt.compare(password, User.password, (err, match) => {
+        if (match) {
+          req.session.user = User;
+          res.redirect('/homepage');
+        } else {
+          res.send('Incorrect Password');
+        }
+      });
     })
     .catch(() => {
-        res.send('username not found');
+      res.send('username not found');
     })
 })
 
 router.get('/logout', (req, res) => {
   req.session.destroy();
-  res.redirect('/');
+  res.redirect('/index');
 })
 module.exports = router;
