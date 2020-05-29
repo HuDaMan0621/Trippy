@@ -47,18 +47,36 @@
     </div>
   </nav>
 
-  <form action="/profile/newPassword" method="post">
-    <h2>Update User Password</h2>
-    <label for="currentPassword">Enter Your Current Password</label>
-    <input type="currentPassword" id="currentPassword" name="currentPassword" required />
-    <div>
-      <label for="newPassword">Change Your Password</label>
-      <input type="newPassword" id="newPassword" name="newPassword" required />
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-  </form>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+
+        <form class="form" action="/profile/newPassword" method="post">
+          <h2>Update User Password</h2>
+          <label for="currentPassword">Enter Your Current Password</label>
+          <input class="form-control" type="currentPassword" id="currentPassword" name="currentPassword" required />
+          <div>
+            <label for="newPassword">Change Your Password</label>
+            <input class="form-control" type="newPassword" id="newPassword" name="newPassword" required />
+            <div>
+              <button class="btn btn-outline-secondary" type="submit">Submit</button>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
