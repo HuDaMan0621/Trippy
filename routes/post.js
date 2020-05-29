@@ -6,7 +6,21 @@ const bcrypt = require('bcrypt');
 // require Authentication
 const checkAuth = require('../auth/checkAuthentication');
 
-// get blog post by id // this is a public route
+router.post('/comment/new', checkAuth, (req, res, next) => {
+    contentId = req.body.blogid;
+    console.log(req.body.blogid);
+    db.Comments.create({
+        UserId: req.session.user.id,
+        ContentId: req.body.blogid,
+        body: req.body.commentbody
+    }
+    )
+    .then(() => {
+        res.redirect(`/post/id/${contentId}`)
+    })
+})
+
+// get blog post by id // this is a public routes
 router.get('/id/:id', (req, res, next) => {
     db.Contents.findByPk(req.params.id)
         .then((blogPost) => {  // get the blog post 
@@ -18,6 +32,7 @@ router.get('/id/:id', (req, res, next) => {
                         user: 'Not Logged In',
                         body: blogPost.dataValues.body,
                         comments: allComments,
+                        id: blogPost.id
                     })
                 })
         })
