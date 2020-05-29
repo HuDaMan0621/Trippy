@@ -49,17 +49,24 @@
     </nav>
     <!-- posts -->
 
-    <% posts.forEach((post) => {%>
+
     <div class="card" style="width: 75vw;">
         <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
         <div class="card-body">
-            <h5 class="card-title"> <%= post.title %> </h5>
-            <p class="card-text"><%= post.body %></p>
+            <h5 class="card-title"> <%= title %> </h5>
+            <p class="card-text"><%= body %></p>
             <a href="#" class="btn btn-primary">Reply</a>
         </div>
+        <h3>Comments</h3>
+        <% comments.forEach(comment => { %>
+        <p>
+            <%= comment.body %>
+            <small> -- <%= comment.createdAt %></small>
+        </p>
+        <% return %>
+        <% }) %>
     </div>
-    <% return %>
-    <% }) %>
+
 
 
 
