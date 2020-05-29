@@ -9,7 +9,9 @@ const checkAuth = require('../auth/checkAuthentication');
 
 /* GET the homepage. */
 router.get('/', checkAuth, (req, res, next) => {
-    db.Contents.findAll().then(results => {
+    db.Contents.findAll({
+        order: [["createdAt", "DESC"]]  
+    }).then(results => {
         res.render('../Views/homepage.ejs', {
             title: 'HomePage',
             user: req.session.user.username,
