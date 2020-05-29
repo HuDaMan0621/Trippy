@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"><%= user %></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/homepage">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/post">Post something</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Following
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Jack</a>
+            <a class="dropdown-item" href="#">Jonathan</a>
+            <a class="dropdown-item" href="#">Ying</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disable" href="#">Profile</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search, please enter username</button>
+        <!-- find all method, select * from user like % {username}, sort by desc something like this-->
+      </form>
+    </div>
+  </nav>
+
+  <form action="/profile/newPassword" method="post">
+    <h2>Update User Password</h2>
+    <label for="currentPassword">Enter Your Current Password</label>
+    <input type="currentPassword" id="currentPassword" name="currentPassword" required />
+    <div>
+      <label for="newPassword">Change Your Password</label>
+      <input type="newPassword" id="newPassword" name="newPassword" required />
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+  </form>
+
+</body>
+
+</html>

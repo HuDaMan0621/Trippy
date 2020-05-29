@@ -13,8 +13,14 @@ const db = require('./models');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const homepageRouter = require('./routes/homepage');
+const postRouter = require('./routes/post');
+const profileRouter = require('./routes/profile');
 
 const PORT = process.env.PORT || 3000;
+
+app.set('view engine', 'ejs');
+
 
 
 app.use(bodyParser.json());
@@ -25,53 +31,47 @@ app.use(
     session({
         secret: 'secret',
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false, // if set to true a cookie will be created no matter what
         cookie: {
             // secure: true, 
-        maxAge: 6000000,
-    }
-}));
-
+            maxAge: 6000000,
+        }
+    }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-function checkAuthentication(req, res, next) {
-    if (req.session.user) {
-      next();
-    } else {
-      res.redirect('/users/login');
-    }
-  }
-  
-app.get('/dashboard', checkAuthentication, (req, res) => {
-    req.send('WELCOME TO THE DASHBOARD!!');
-})
+app.use('/homepage', homepageRouter);
+app.use('/post', postRouter);
+app.use('/profile', profileRouter);
+
+// app.get('/homepage', checkAuthentication, (req, res) => {
+//     res.send({ message: 'WELCOME TO THE DASHBOARD!!' });
+// })
 //users
 // app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 // app.get('/index')
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.send('users.ejs');
-  });
-  
-  router.post('/', (req, res) => {
+});
+
+router.post('/', (req, res) => {
     const { username, email, password } = req.body;
-  
+
     bcrypt.hash(password, 10, (err, hash) => {
-  
-      db.User.create({
-        username,
-        email,
-        password: hash,
-      }).then((result) => {
-        res.redirect('/users')
-      });
+
+        db.User.create({
+            username,
+            email,
+            password: hash,
+        }).then((result) => {
+            res.redirect('/users')
+        });
     });
-  });
+});
 //   module.exports = router;
-  
+
 
 //routes
 app.get('/index', (req, res) => {
@@ -82,5 +82,6 @@ app.get('/index', (req, res) => {
     // })
 })
 
+// db.sequelize.sync();
 app.listen(PORT, () => console.log(`The Server is running on Http://localhost:${PORT}`));
 
