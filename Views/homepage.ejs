@@ -42,10 +42,9 @@
                     <a class="nav-link" href="./users/logout">Logout</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search, please enter
-                    username</button>
+            <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" id="search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <!-- find all method, select * from user like % {username}, sort by desc something like this-->
             </form>
         </div>
@@ -55,7 +54,7 @@
         <div class="row">
             <div class="col-md-8">
 
-
+                <%= heading %>
                 <!-- posts -->
 
                 <% posts.forEach((post) => {%>
@@ -70,7 +69,7 @@
                                 <a href="/post/id/<%= post.id %>" class="btn btn-outline-secondary">View Full Post</a>
                             </div>
                         </div>
-                        posted by - <a href="#"><b><%= post.user_id %></b></a>
+                        posted by - <a href="/search/id/<%= post.user_id %>"><b><%= post.user_id %></b></a>
                         -
                         <small> <%= post.createdAt %></small><br>
                         <p class="card-text">
