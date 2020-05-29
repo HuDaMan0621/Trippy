@@ -55,7 +55,7 @@
         <div class="card-body">
             <h5 class="card-title"> <%= title %> </h5>
             <p class="card-text"><%= body %></p>
-            <a href="#" class="btn btn-primary">Reply</a>
+            <a href="#comment-form" class="btn btn-primary">Reply</a>
         </div>
         <h3>Comments</h3>
         <% comments.forEach(comment => { %>
@@ -65,6 +65,16 @@
         </p>
         <% return %>
         <% }) %>
+    </div>
+
+    <div id="comment-form">
+        <form action="/post/comment/new" method="POST">
+            <div class="form-group">
+              <textarea class="form-control" style="display: none" name="blogid"><%= id %></textarea>
+              <textarea class="form-control" id="commentbody" name="commentbody" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
     </div>
 
 
