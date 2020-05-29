@@ -10,6 +10,7 @@ const checkAuth = require('../auth/checkAuthentication');
 /* GET the homepage. */
 router.get('/', checkAuth, (req, res, next) => {
     db.Contents.findAll({
+        limit: 10,
         order: [["createdAt", "DESC"]]
     }).then(results => {
         console.log(results);

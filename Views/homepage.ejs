@@ -53,8 +53,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-
-                <%= heading %>
+                <div class="m-3">
+                    <%= heading %>
+                </div>
                 <!-- posts -->
 
                 <% posts.forEach((post) => {%>
@@ -74,7 +75,7 @@
                         <small> <%= post.createdAt %></small><br>
                         <p class="card-text">
                             <% if (post.body.length > 200) { %>
-                            <%=    post.body.slice(0,400) %>...
+                            <%-    post.body.slice(0,400) %>...
                             <% } else { %>
                         <div class="postBody">
                             <%- post.body %>

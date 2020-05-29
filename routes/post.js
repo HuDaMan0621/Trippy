@@ -12,7 +12,8 @@ router.post('/comment/new', checkAuth, (req, res, next) => {
     db.Comments.create({
         UserId: req.session.user.id,
         ContentId: req.body.blogid,
-        body: req.body.commentbody
+        body: req.body.commentbody,
+        content_id: req.session.user.username,
     }
     )
         .then(() => {
@@ -22,6 +23,10 @@ router.post('/comment/new', checkAuth, (req, res, next) => {
 
 // get blog post by id // this is a public routes
 router.get('/id/:id', (req, res, next) => {
+    let auth = false;
+    if (req.session.user) {
+        auth = true;
+    }
     db.Contents.findByPk(req.params.id)
         .then((blogPost) => {  // get the blog post 
             db.Comments.findAll(
@@ -32,7 +37,8 @@ router.get('/id/:id', (req, res, next) => {
                         user: 'Not Logged In',
                         body: blogPost.dataValues.body,
                         comments: allComments,
-                        id: blogPost.id
+                        id: blogPost.id,
+                        auth: auth,
                     })
                 })
         })
