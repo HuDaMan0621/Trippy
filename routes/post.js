@@ -35,10 +35,12 @@ router.get('/id/:id', (req, res, next) => {
                     res.render('../Views/fullpost.ejs', {
                         title: blogPost.dataValues.title,
                         user: 'Not Logged In',
-                        body: blogPost.dataValues.body,
+                        body: blogPost.body,
                         comments: allComments,
                         id: blogPost.id,
                         auth: auth,
+                        author: blogPost.user_id,
+                        authorId: blogPost.UserId,
                     })
                 })
         })

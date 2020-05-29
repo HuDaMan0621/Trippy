@@ -10,7 +10,7 @@ router.get('/id/:id', (req, res, next) => {
     let input = req.params.id;
     console.log(input);
     db.Contents.findAll({
-        where: { user_id: { [Op.iLike]: input } },
+        where: { user_id: input },
         order: [["createdAt", "DESC"]]
     }).then((results) => {
         res.render('./homepage', {
