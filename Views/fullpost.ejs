@@ -39,13 +39,12 @@
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./users/logout">Logout</a>
+                    <a class="nav-link" href="../../users/logout">Logout</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search, please enter
-                    username</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <!-- find all method, select * from user like % {username}, sort by desc something like this-->
             </form>
         </div>
@@ -57,32 +56,52 @@
             <div class="col-md-8">
 
 
-                <div class="card" style="width: 75vw;">
+                <div class="card shadow my-3" style="width: 75vw;">
                     <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                     <div class="card-body">
-                        <h5 class="card-title"> <%= title %> </h5>
+                        <h3 class="card-title"> <%= title %> </h3>
                         <p class="card-text"><%- body %></p>
+                        <% if (auth == true) { %>
                         <a href="#comment-form" class="btn btn-primary">Reply</a>
+                        <% } %>
                     </div>
-                    <h3>Comments</h3>
-                    <% comments.forEach(comment => { %>
-                    <p>
-                        <%= comment.body %>
-                        <small> -- <%= comment.createdAt %></small>
-                    </p>
-                    <% return %>
-                    <% }) %>
                 </div>
-
-                <div id="comment-form">
-                    <form action="/post/comment/new" method="POST">
-                        <div class="form-group">
-                            <textarea class="form-control" style="display: none" name="blogid"><%= id %></textarea>
-                            <textarea class="form-control" id="commentbody" name="commentbody" rows="3"></textarea>
+                <h3 class="m-3">Comments</h3>
+                <% comments.forEach(comment => { %>
+                <div class="card shadow my-1" style="width: 75vw">
+                    <div class="card-body mt-1">
+                        <div class="card-text">
+                            <%= comment.body %>
+                            <br>
+                            <a href="/search/id/<%= comment.content_id %>"><b><%= comment.content_id %></b></a>
+                            <small><%= comment.createdAt %></small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    </div>
                 </div>
+                <% return %>
+                <% }) %>
+
+
+                <% if (auth == true) { %>
+                <div class="comment">
+                    <h3 class="m-3">Post a Comment</h3>
+                    <div class="card" style="width: 75vw;">
+                        <div class="card-body">
+                            <div id="comment-form">
+                                <form action="/post/comment/new" method="POST">
+                                    <div class="form-group">
+                                        <textarea class="form-control" style="display: none"
+                                            name="blogid"><%= id %></textarea>
+                                        <textarea class="form-control" id="commentbody" name="commentbody"
+                                            rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%  } %>
             </div>
         </div>
     </div>
