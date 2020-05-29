@@ -15,6 +15,7 @@ router.get('/', checkAuth, (req, res, next) => {
         console.log(results);
         res.render('../Views/homepage.ejs', {
             title: 'HomePage',
+            heading: 'Latest Posts',
             user: req.session.user.username,
             posts: results,
         })

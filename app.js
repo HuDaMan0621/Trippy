@@ -16,6 +16,7 @@ const usersRouter = require('./routes/users');
 const homepageRouter = require('./routes/homepage');
 const postRouter = require('./routes/post');
 const profileRouter = require('./routes/profile');
+const searchRouter = require('./routes/search');
 
 const PORT = process.env.PORT || 3000;
 
@@ -43,6 +44,7 @@ app.use('/users', usersRouter);
 app.use('/homepage', homepageRouter);
 app.use('/post', postRouter);
 app.use('/profile', profileRouter);
+app.use('/search', searchRouter);
 
 // app.get('/homepage', checkAuthentication, (req, res) => {
 //     res.send({ message: 'WELCOME TO THE DASHBOARD!!' });
