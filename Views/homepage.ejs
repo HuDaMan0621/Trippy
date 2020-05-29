@@ -77,8 +77,10 @@
                             <% if (post.body.length > 200) { %>
                             <%=    post.body.slice(0,400) %>...
                             <% } else { %>
-                            <%= post.body %>
-                            <%  } %>
+                        <div class="postBody">
+                            <%- post.body %>
+                        </div>
+                        <%  } %>
                         </p>
 
                     </div>

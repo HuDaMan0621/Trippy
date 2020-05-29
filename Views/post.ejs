@@ -6,6 +6,17 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+  <script src='https://cdn.tiny.cloud/1/n0yeru4dcatez6lxjtgu14wvl5290aw2kxlrq1tax9p9qbnr/tinymce/5/tinymce.min.js'
+    referrerpolicy="origin">
+    </script>
+  <script>
+    tinymce.init({
+      selector: '#mytextarea'
+    });
+  </script>
+
 </head>
 
 <body>
@@ -38,6 +49,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/profile">Profile</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./users/logout">Logout</a>
+        </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -58,10 +72,16 @@
             <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp"
               placeholder="Enter Title">
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="body">Blog post</label>
             <textarea class="form-control" id="body" name="body" rows="3"></textarea>
+          </div> -->
+
+          <div class="form-group">
+            <textarea id="mytextarea" name="body">hello world</textarea>
           </div>
+
+
           <div class="form-group">
             <label for="fileUpload">Upload an Image</label>
             <input type="file" class="form-control-file" name="img_path" id="fileUpload">
