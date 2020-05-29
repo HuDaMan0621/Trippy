@@ -5,49 +5,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 
 </head>
 
 <body>
-    <section>
-        <form action="/users" method="post">
-            <div class="">
-                <label for="username">username</label>
-                <input type="text" id="username" name="username" required>
-            </div>
 
-            <div class="">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="row bg-light shadow">
+                    <div class="col-md-5 m-3">
+                        <form class="form" action="/users" method="post">
+                            <h2>Register</h2>
+                            <div>
+                                <label for="username">Username</label>
+                                <input class="form-control" type="text" id="username" name="username" required>
+                            </div>
+                            <div>
+                                <label for="email">Email</label>
+                                <input class="form-control" type="email" id="email" name="email" required>
+                            </div>
+                            <div>
+                                <label for="password">Password</label>
+                                <input class="form-control" type="password" id="password" name="password" required>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" type="submit">Register</button>
+                            </div>
+                        </form>
 
-            <div class="">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
+                    </div>
+                    <div class="col-md-5 m-3">
+                        <!-- login -->
+                        <form class="form" action="/users/login" method="post">
+                            <h2>Login</h2>
+                            <div>
+                                <label for="username"> Username</label>
+                                <input class="form-control" type="text" id="username" name="username" required />
+                            </div>
 
-            <div class="">
-                <button type="submit">Register</button>
-            </div>
-        </form>
+                            <label for="password"> Password</label>
+                            <input class="form-control" type="password" id="password" name="password" required />
+                            <div>
+                                <button class="btn btn-primary" type="submit">Login</button>
+                            </div>
+                        </form>
 
-        <!-- login -->
-        <form action="/users/login" method="post">
-            <h2>Login</h2>
-            <div>
-                <label for="username"> Username</label>
-                <input type="text" id="username" name="username" required />
-            </div>
+                    </div>
+                </div>
 
-            <label for="password"> Password</label>
-            <input type="password" id="password" name="password" required />
-            <div>
-                <button type="submit">Login</button>
+
+                </section>
+
+
             </div>
-        </form>
-    </section>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

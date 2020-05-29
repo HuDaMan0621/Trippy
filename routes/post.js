@@ -15,9 +15,9 @@ router.post('/comment/new', checkAuth, (req, res, next) => {
         body: req.body.commentbody
     }
     )
-    .then(() => {
-        res.redirect(`/post/id/${contentId}`)
-    })
+        .then(() => {
+            res.redirect(`/post/id/${contentId}`)
+        })
 })
 
 // get blog post by id // this is a public routes
@@ -53,6 +53,7 @@ router.post('/new', (req, res, next) => {
         UserId: req.session.user.id,
         title: req.body.title,
         body: req.body.body,
+        user_id: req.session.user.username
     }).then(() => {
         res.redirect('/homepage');
     })

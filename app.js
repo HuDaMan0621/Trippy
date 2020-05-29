@@ -34,7 +34,7 @@ app.use(
         saveUninitialized: false, // if set to true a cookie will be created no matter what
         cookie: {
             // secure: true, 
-            maxAge: 6000000,
+            maxAge: 6000000000000000000000000000,
         }
     }));
 
