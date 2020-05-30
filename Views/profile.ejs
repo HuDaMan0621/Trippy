@@ -42,9 +42,9 @@
           <a class="nav-link" href="./users/logout">Logout</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search, please enter username</button>
+      <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" id="search" name="search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         <!-- find all method, select * from user like % {username}, sort by desc something like this-->
       </form>
     </div>
@@ -62,7 +62,7 @@
             <br>
             registered: <h5><%= userData.createdAt.toDateString() %></h5>
           </div>
-          <div class="col m-3">
+          <div class="col m-3 my-auto">
             <form class="form" action="/profile/newPassword" method="post">
               <h3>Update User Password</h3>
               <label for="currentPassword">Enter Your Current Password</label>

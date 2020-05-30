@@ -39,7 +39,7 @@ router.get('/id/:id', (req, res, next) => {
                     .then((allComments) => {
                         res.render('../Views/fullpost.ejs', {
                             title: blogPost.dataValues.title,
-                            user: 'Not Logged In',
+                            user: '',
                             body: blogPost.body,
                             comments: allComments,
                             likes: blogPost.likes,

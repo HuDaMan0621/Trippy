@@ -3,9 +3,11 @@
 
 <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/771e6a2d5d.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -42,8 +44,8 @@
                     <a class="nav-link" href="../../users/logout">Logout</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" id="search" name="search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <!-- find all method, select * from user like % {username}, sort by desc something like this-->
             </form>
@@ -74,15 +76,36 @@
                 <div class="card-body">
                     <h3 class="card-title"> <%= title %> </h3>
                     <hr>
-                    <p class=" card-text"><%- body %></p>
+                    <p class="card-text"><%- body %></p>
+
+                    <!-- !auth -->
+                    <% if (auth == false) { %>
                     <% if (likes > 1) { %>
-                    <%= likes %> likes
+                    <a href="/like/<%= id %>" class="btn btn-outline-primary disabled"><%= likes %> <i
+                            class="far fa-thumbs-up"></i>
+                    </a>
                     <% } else if (likes > 0) { %>
-                    <%= likes %> like
+                    <a href="/like/<%= id %>" class="btn btn-outline-primary disabled"><%= likes %> <i
+                            class="far fa-thumbs-up"></i>
+                    </a>
                     <% } %>
+                    <% } %>
+
+                    <!-- if auth -->
                     <% if (auth == true) { %>
-                    <a href="#comment-form" class="btn btn-primary">Reply</a>
-                    <a href="/like/<%= id %>" class="btn btn-primary">Up Vote</a>
+                    <a href="#comment-form" class="btn btn-secondary">Reply</a>
+                    <% if (likes > 1) { %>
+                    <a href="/like/<%= id %>" class="btn btn-outline-secondary"><%= likes %> <i
+                            class="far fa-thumbs-up"></i>
+                    </a>
+                    <% } else if (likes > 0) { %>
+                    <a href="/like/<%= id %>" class="btn btn-outline-secondary"><%= likes %> <i
+                            class="far fa-thumbs-up"></i>
+                    </a>
+                    <% }  else {%>
+                    <a href="/like/<%= id %>" class="btn btn-outline-secondary"><i class="far fa-thumbs-up"></i>
+                    </a>
+                    <% } %>
                     <% } %>
                     <small> </small>
                 </div>
