@@ -8,7 +8,7 @@ const checkAuth = require('../auth/checkAuthentication');
 
 router.post('/comment/new', checkAuth, (req, res, next) => {
     contentId = req.body.blogid;
-    console.log(req.body.blogid);
+    // console.log(req.body.blogid);
     db.Comments.create({
         UserId: req.session.user.id,
         ContentId: req.body.blogid,
@@ -21,7 +21,7 @@ router.post('/comment/new', checkAuth, (req, res, next) => {
         })
 })
 
-// get blog post by id // this is a public routes
+// get blog post by id // this is a public route
 router.get('/id/:id', (req, res, next) => {
     let auth = false;
     if (req.session.user) {
@@ -29,20 +29,27 @@ router.get('/id/:id', (req, res, next) => {
     }
     db.Contents.findByPk(req.params.id)
         .then((blogPost) => {  // get the blog post 
-            db.Comments.findAll(
-                { where: { ContentId: req.params.id }, order: [["createdAt", "DESC"]] })
-                .then((allComments) => {
-                    res.render('../Views/fullpost.ejs', {
-                        title: blogPost.dataValues.title,
-                        user: 'Not Logged In',
-                        body: blogPost.body,
-                        comments: allComments,
-                        id: blogPost.id,
-                        auth: auth,
-                        author: blogPost.user_id,
-                        authorId: blogPost.UserId,
+            console.log(blogPost.UserId);
+            db.User.findOne( // get the user info
+                { where: { id: blogPost.UserId } },
+            ).then((userData) => {
+                console.log(userData.createdAt); // object
+                db.Comments.findAll( // get the comments
+                    { where: { ContentId: req.params.id }, order: [["createdAt", "DESC"]] })
+                    .then((allComments) => {
+                        res.render('../Views/fullpost.ejs', {
+                            title: blogPost.dataValues.title,
+                            user: 'Not Logged In',
+                            body: blogPost.body,
+                            comments: allComments,
+                            id: blogPost.id,
+                            auth: auth,
+                            author: blogPost.user_id,
+                            authorId: blogPost.UserId,
+                            userData: userData,
+                        })
                     })
-                })
+            })
         })
 })
 

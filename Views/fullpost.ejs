@@ -56,16 +56,16 @@
         <div class="col-md-2 my-3 mx-auto">
             <div class="col border rounded py-3 text-center">
 
-                <h3><%= author %></h3>
+                <h3><%= userData.username %></h3>
                 <div class="col border mx-auto" style="height: 100px; width: 100px;">avatar</div>
-                <small>userlocation</small>
+                <small><%= userData.location %></small>
                 <br>
-                <small>joined date</small>
+                <small>user since <%= userData.createdAt.getFullYear() %></small>
                 <hr>
 
                 <a href="#">Profile</a>
                 <br>
-                <a href="/search/id/<%= authorId %>">Posts</a>
+                <a href="/search/id/<%= userData.username %>">Posts</a> <!-- pass in a name -->
             </div>
         </div>
         <div class="col-md-10">
@@ -81,15 +81,22 @@
                     <small> </small>
                 </div>
             </div>
-            <h3 class="m-3">Comments</h3>
+            <h3 class="m-3 ml-5">Comments</h3>
             <% comments.forEach(comment => { %>
-            <div class="card shadow my-1" style="width: 75vw">
+            <div class="card shadow my-1 mx-auto bg-light" style="width: 75vw">
                 <div class="card-body mt-1">
                     <div class="card-text">
-                        <%= comment.body %>
-                        <br>
-                        <a href="/search/id/<%= comment.content_id %>"><b><%= comment.content_id %></b></a>
-                        <small><%= comment.createdAt %></small>
+                        <div class="row">
+                            <div class="col-2 m-0 p-0 border text-center">
+                                <a href="/search/id/<%= comment.content_id %>"><b><%= comment.content_id %></b></a>
+                                <div class="border mx-auto" style="width: 100px; height: 100px;">avatar</div>
+                            </div>
+                            <div class="col-10">
+                                <%= comment.body %>
+                                <br>
+                                <small><%= comment.createdAt.toDateString() %></small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -97,10 +104,12 @@
             <% }) %>
 
 
+
+
             <% if (auth == true) { %>
             <div class="comment">
-                <h3 class="m-3">Post a Comment</h3>
-                <div class="card">
+                <h3 class="m-3 ml-5">Post a Comment</h3>
+                <div class="card shadow my-1 mx-auto bg-light" style="width: 75vw">
                     <div class="card-body">
                         <div id="comment-form">
                             <form action="/post/comment/new" method="POST">
@@ -119,7 +128,7 @@
             <%  } %>
         </div>
     </div>
-    </div>
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

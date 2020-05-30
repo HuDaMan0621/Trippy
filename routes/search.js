@@ -25,7 +25,7 @@ router.get('/id/:id', (req, res, next) => {
 // get search input
 router.post('/', (req, res, next) => {
     let input = req.body.search;
-    console.log(input);
+    // console.log(input);
     db.Contents.findAll({
         where: { user_id: { [Op.iLike]: input } },
         order: [["createdAt", "DESC"]]
