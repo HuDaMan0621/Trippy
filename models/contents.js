@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     long_location: DataTypes.INTEGER,
     location: DataTypes.STRING,
     date: DataTypes.DATE,
-    title: DataTypes.STRING
+    title: DataTypes.STRING,
+    likes: { type: DataTypes.INTEGER, defaultValue: 0 }
   }, {});
   Contents.associate = function (models) {
     Contents.belongsTo(models.User)

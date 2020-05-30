@@ -29,7 +29,7 @@ router.get('/id/:id', (req, res, next) => {
     }
     db.Contents.findByPk(req.params.id)
         .then((blogPost) => {  // get the blog post 
-            console.log(blogPost.UserId);
+            console.log(blogPost);
             db.User.findOne( // get the user info
                 { where: { id: blogPost.UserId } },
             ).then((userData) => {
@@ -42,6 +42,7 @@ router.get('/id/:id', (req, res, next) => {
                             user: 'Not Logged In',
                             body: blogPost.body,
                             comments: allComments,
+                            likes: blogPost.likes,
                             id: blogPost.id,
                             auth: auth,
                             author: blogPost.user_id,
