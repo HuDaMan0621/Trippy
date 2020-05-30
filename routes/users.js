@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
       email,
       password: hash,
     }).then((result) => {
-      res.redirect('/users')
+      res.redirect('/')
     });
   });
 });

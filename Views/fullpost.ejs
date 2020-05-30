@@ -3,9 +3,11 @@
 
 <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/771e6a2d5d.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -42,8 +44,8 @@
                     <a class="nav-link" href="../../users/logout">Logout</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" id="search" name="search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <!-- find all method, select * from user like % {username}, sort by desc something like this-->
             </form>
@@ -53,7 +55,7 @@
 
 
     <div class="row mx-auto">
-        <div class="col-md-2 my-3 mx-auto">
+        <div class="col-lg-2 my-3 mx-auto">
             <div class="col border rounded py-3 text-center sticky-top">
 
                 <h3><%= userData.username %></h3>
@@ -68,15 +70,42 @@
                 <a href="/search/id/<%= userData.username %>">Posts</a> <!-- pass in a name -->
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-lg-10">
             <div class="card shadow my-3">
                 <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                 <div class="card-body">
                     <h3 class="card-title"> <%= title %> </h3>
                     <hr>
-                    <p class=" card-text"><%- body %></p>
+                    <p class="card-text"><%- body %></p>
+
+                    <!-- !auth -->
+                    <% if (auth == false) { %>
+                    <% if (likes > 1) { %>
+                    <a href="/like/<%= id %>" class="btn btn-outline-primary disabled"><%= likes %> <i
+                            class="far fa-thumbs-up"></i>
+                    </a>
+                    <% } else if (likes > 0) { %>
+                    <a href="/like/<%= id %>" class="btn btn-outline-primary disabled"><%= likes %> <i
+                            class="far fa-thumbs-up"></i>
+                    </a>
+                    <% } %>
+                    <% } %>
+
+                    <!-- if auth -->
                     <% if (auth == true) { %>
-                    <a href="#comment-form" class="btn btn-primary">Reply</a>
+                    <a href="#comment-form" class="btn btn-secondary">Reply</a>
+                    <% if (likes > 1) { %>
+                    <a href="/like/<%= id %>" class="btn btn-outline-secondary"><%= likes %> <i
+                            class="far fa-thumbs-up"></i>
+                    </a>
+                    <% } else if (likes > 0) { %>
+                    <a href="/like/<%= id %>" class="btn btn-outline-secondary"><%= likes %> <i
+                            class="far fa-thumbs-up"></i>
+                    </a>
+                    <% }  else {%>
+                    <a href="/like/<%= id %>" class="btn btn-outline-secondary"><i class="far fa-thumbs-up"></i>
+                    </a>
+                    <% } %>
                     <% } %>
                     <small> </small>
                 </div>
@@ -87,11 +116,11 @@
                 <div class="card-body mt-1">
                     <div class="card-text">
                         <div class="row">
-                            <div class="col-2 m-0 p-0 border text-center">
+                            <div class="col-xs-2 m-0 p-0 border text-center" style="min-width: 110px;">
                                 <a href="/search/id/<%= comment.content_id %>"><b><%= comment.content_id %></b></a>
                                 <div class="border mx-auto" style="width: 100px; height: 100px;">avatar</div>
                             </div>
-                            <div class="col-10">
+                            <div class="col-xs-10 pl-2">
                                 <%= comment.body %>
                                 <br>
                                 <small><%= comment.createdAt.toDateString() %></small>

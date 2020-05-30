@@ -42,34 +42,45 @@
           <a class="nav-link" href="./users/logout">Logout</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search, please enter username</button>
+      <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" id="search" name="search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         <!-- find all method, select * from user like % {username}, sort by desc something like this-->
       </form>
     </div>
   </nav>
 
-
   <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-
-        <form class="form" action="/profile/newPassword" method="post">
-          <h2>Update User Password</h2>
-          <label for="currentPassword">Enter Your Current Password</label>
-          <input class="form-control" type="currentPassword" id="currentPassword" name="currentPassword" required />
-          <div>
-            <label for="newPassword">Change Your Password</label>
-            <input class="form-control" type="newPassword" id="newPassword" name="newPassword" required />
-            <div>
-              <button class="btn btn-outline-secondary" type="submit">Submit</button>
-            </div>
-        </form>
-
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-8 card shadow m-3">
+        <div class="row">
+          <div class="col m-3">
+            <div class="border" style="width: 100px; height: 100px">avatar</div>
+            user: <h2><%= userData.username %></h2>
+            <br>
+            email: <h3><%= userData.email %></h3>
+            <br>
+            registered: <h5><%= userData.createdAt.toDateString() %></h5>
+          </div>
+          <div class="col m-3 my-auto">
+            <form class="form" action="/profile/newPassword" method="post">
+              <h3>Update User Password</h3>
+              <label for="currentPassword">Enter Your Current Password</label>
+              <input class="form-control" type="currentPassword" id="currentPassword" name="currentPassword" required />
+              <div>
+                <label for="newPassword">Change Your Password</label>
+                <input class="form-control" type="newPassword" id="newPassword" name="newPassword" required />
+                <div>
+                  <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  </div>
+
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
