@@ -13,7 +13,6 @@ router.get('/', checkAuth, (req, res, next) => {
         limit: 10,
         order: [["createdAt", "DESC"]]
     }).then(results => {
-        // console.log(results);
         res.render('../Views/homepage.ejs', {
             title: 'HomePage',
             heading: 'Latest Posts',
