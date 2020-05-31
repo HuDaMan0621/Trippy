@@ -4,10 +4,6 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon'); //require favicon
 const path = require('path');
-
-
-// import favicon from 'serve-favicon';
-
 var router = express.Router();
 
 const bcrypt = require('bcrypt');
@@ -26,11 +22,6 @@ const likeRouter = require('./routes/like');
 const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
-
-
-
-
-
 
 //favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
