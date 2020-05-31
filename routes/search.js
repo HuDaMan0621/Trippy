@@ -30,6 +30,9 @@ const sequelize = new Sequelize('travelblog',
 
 router.post('/', (req, res, next) => {
     let input = req.body.search;
+    if (input == '') {
+        res.send('no input entered');
+    }
     console.log(input);
     sequelize.query(`SELECT * FROM "Contents" WHERE (fts @@ plainto_tsquery('english', '%${input}%')) OR (user_id iLike '%${input}%')`, { type: sequelize.QueryTypes.SELECT })
         .then((results) => {
