@@ -1,7 +1,24 @@
 var express = require('express');
 var router = express.Router();
+const Sequelize = require('sequelize');
 const db = require('../models')
 const bcrypt = require('bcrypt');
+
+const sequelize = new Sequelize('travelblog',
+    'postgres',
+    'postgres', {
+    host: '127.0.0.1',
+    dialect: 'postgres',
+    logging: console.log,
+    freezeTableName: true,
+
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
+})
 
 // require Authentication
 const checkAuth = require('../auth/checkAuthentication');
@@ -65,15 +82,23 @@ router.get('/', checkAuth, (req, res, next) => {
 
 // post a new blog entry, private route, to post you must have gone through above route and therefor have access to the private page
 router.post('/new', (req, res, next) => {
+    // console.log(req.session.user.id)
     db.Contents.create({
         UserId: req.session.user.id,
         title: req.body.title,
         body: req.body.body,
-        user_id: req.session.user.username
-    }).then(() => {
-        res.redirect('/homepage');
+        user_id: req.session.user.username,
+        // fts: to_tsvector('english', req.body.body),
+    }).then((result) => {
+        console.log(result);
+        sequelize.query(`UPDATE "Contents" SET fts = to_tsvector('english', '${result.title}') || to_tsvector('english', '${result.body}') WHERE "id" = '${result.id}'`)
+            .then(() => {
+                res.send(result);
+            });
     })
-})
+}
+)
+
 
 
 

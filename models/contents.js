@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     title: DataTypes.STRING,
     likes: { type: DataTypes.INTEGER, defaultValue: 0 },
+    fts: DataTypes.STRING,
   }, {});
   Contents.associate = function (models) {
     Contents.belongsTo(models.User)
