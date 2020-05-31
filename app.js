@@ -22,6 +22,7 @@ const likeRouter = require('./routes/like');
 const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
+app.set("img", path.join(__dirname, "img"));
 
 //favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
