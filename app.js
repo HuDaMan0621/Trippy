@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon'); //require favicon
-const path = require ('path');
+const path = require('path');
+
 
 // import favicon from 'serve-favicon';
 
@@ -26,8 +27,13 @@ const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 
+
+
+
+
+
 //favicon
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico'))); 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
