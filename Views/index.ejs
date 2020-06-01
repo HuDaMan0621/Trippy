@@ -24,7 +24,7 @@
             height: 100%;
 
             object-fit: cover;
-            
+
             /* Center and scale the image nicely */
             background-position: center;
             background-repeat: no-repeat;
@@ -98,7 +98,12 @@
                                     <button class="btn btn-primary" type="submit">Login</button>
                                 </div>
                             </form>
-
+                            <br>
+                            <br>
+                            <div class="text-center" id="errorMessage">
+                                <!-- error goes here -->
+                                <%= errorMessage %>
+                            </div>
                         </div>
                     </div>
                     <!-- oauth with GitHub -->

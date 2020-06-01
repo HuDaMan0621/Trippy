@@ -9,6 +9,7 @@ const { Op } = require('sequelize');
 router.get('/', function (req, res, next) {
   res.render('users.ejs', {
     title: 'Login Page',
+    errorMessage: '',
   });
 });
 
@@ -32,11 +33,11 @@ router.post('/', (req, res) => {
             email,
             password: hash,
           }).then((result) => {
-            res.redirect('/')
+            res.render('index', { errorMessage: `Welcome ${result.username} please log in` })
           });
         });
       } else {
-        res.send('username taken')
+        res.render('index', { errorMessage: 'username or email already in database' })
       }
     })
 })
