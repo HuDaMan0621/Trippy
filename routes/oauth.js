@@ -77,11 +77,23 @@ router.get('/login/github/callback', async (req, res) => {
                 username: `github:${githubData.id}`,
                 email: githubData.email
             }
-        }) .then (User => {
+        }) .then (User => { //this part checks to see if the user is a github user, 
+            //if they are, we will use their session information and apply to the profile page.
             req.session.githubId = githubData.id
+            console.log(User)
             req.session.token = token
-            req.session.user = User
+            req.session.user = User[0]
             req.session.user.githubData = githubData
+            req.session.user.username = githubData.login
+
+            console.log('test starting here !!!!!!!!!!!!!!!!!!!!!!!')
+            console.log(req.session.user.username)
+            console.log('test starting we need this to print !!!!!!!!!!!!!!!!!!!!!!!')
+            console.log(req.session.user.id)
+
+            // console.log(req.session.user)
+            // console.log(User.id)
+            
             res.redirect('/homepage')
         })
     } else {
