@@ -63,6 +63,16 @@
             <br>
             registered: <h5><%= userData.createdAt.toDateString() %></h5>
           </div>
+          <form class="form" action="/profile/profilePic" method="post" enctype="multipart/form-data">
+            <div class="">
+              <label for="profilePic">Profile Picture URL</label>
+              <input type="file" class="form-control-file" name="profilePic" id="profilePic">
+            </div>
+            <div class="">
+              <button type="submit">Register Picture</button>
+            </div>
+          </form>
+
           <div class="col m-3 my-auto">
             <form class="form" action="/profile/newPassword" method="post">
               <h3>Update User Password</h3>

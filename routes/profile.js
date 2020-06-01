@@ -2,10 +2,25 @@ var express = require('express');
 var router = express.Router();
 const db = require('../models')
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+const multer = require('multer');
+const path = require('path');
+const ExifImage = require('exif');
+
 
 // require Authentication
 const checkAuth = require('../auth/checkAuthentication');
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './img/profilepictures/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+var upload = multer({ storage: storage })
 
 /* GET the homepage. */
 router.get('/', checkAuth, (req, res, next) => {
@@ -17,6 +32,18 @@ router.get('/', checkAuth, (req, res, next) => {
                 userData: results
             });
         })
+});
+
+router.post('/profilePic', upload.single('profilePic'), (req, res, next) => {
+            console.log(req.file);
+            const { profilePic } = req.body;
+            console.log(profilePic);
+            let cookieId = req.session.user.id;
+            db.User.update({ picture: req.file.path }, { returning: true, where: { id: cookieId } }
+                ).then((result) => {
+                    console.log(result);
+                    res.redirect('/homepage')
+            });
 });
 
 //todo implement changing pw 
