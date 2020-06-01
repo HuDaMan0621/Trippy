@@ -36,6 +36,7 @@ router.post('/', (req, res, next) => {
     console.log(input);
     sequelize.query(`SELECT * FROM "Contents" WHERE (fts @@ plainto_tsquery('english', '%${input}%')) OR (user_id iLike '%${input}%')`, { type: sequelize.QueryTypes.SELECT })
         .then((results) => {
+            console.log(results)
             res.render('./homepage', {
                 title: 'Search Results',
                 heading: `Search Results for ${input}`,
@@ -47,21 +48,22 @@ router.post('/', (req, res, next) => {
 
 
 // get route when clicking on username
-// router.get('/id/:id', (req, res, next) => {
-//     let input = req.params.id;
-//     console.log(input);
-//     db.Contents.findAll({
-//         where: { user_id: input },
-//         order: [["createdAt", "DESC"]]
-//     }).then((results) => {
-//         res.render('./homepage', {
-//             title: 'Search Results',
-//             heading: `Search Results for ${input}`,
-//             user: '',
-//             posts: results
-//         });
-//     })
-// })
+router.get('/id/:id', (req, res, next) => {
+    let input = req.params.id;
+    console.log(input);
+    db.Contents.findAll({
+        where: { user_id: input },
+        order: [["createdAt", "DESC"]]
+    }).then((results) => {
+        console.log(results);
+        res.render('./homepage', {
+            title: 'Search Results',
+            heading: `Search Results for ${input}`,
+            user: '',
+            posts: results
+        });
+    })
+})
 
 // get search input
 // router.post('/', (req, res, next) => {
