@@ -56,10 +56,10 @@
 
     <div class="row mx-auto">
         <div class="col-lg-2 my-3 mx-auto">
-            <div class="col border rounded py-3 text-center sticky-top">
+            <div class="col border rounded py-3 text-center sticky-top bg-light">
 
-                <h3><%= userData.username %></h3>
-                <div class="col border mx-auto" style="height: 100px; width: 100px;">
+                <h3><%= author %></h3>
+                <div class="col mx-auto">
                     <img src="../../<%= avatar %>">
                 </div>
                 <small><%= userData.location %></small>
@@ -78,6 +78,7 @@
                 <div class="card-body">
                     <h3 class="card-title"> <%= title %> </h3>
                     <hr>
+                    <img src="../../<%= img %>">
                     <p class="card-text"><%- body %></p>
 
                     <!-- !auth -->
@@ -120,7 +121,9 @@
                         <div class="row">
                             <div class="col-xs-2 m-0 p-0 border text-center" style="min-width: 110px;">
                                 <a href="/search/id/<%= comment.content_id %>"><b><%= comment.content_id %></b></a>
-                                <div class="border mx-auto" style="width: 100px; height: 100px;">avatar</div>
+                                <div class="border mx-auto" style="width: 100px; height: 100px;">
+                                    <img src="../../<%= comment.avatar %>">
+                                </div>
                             </div>
                             <div class="col-xs-10 pl-2">
                                 <%= comment.body %>

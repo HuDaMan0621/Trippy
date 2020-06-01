@@ -6,6 +6,7 @@ const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
 const ExifImage = require('exif');
+var Jimp = require('jimp');
 
 
 // require Authentication
@@ -13,18 +14,18 @@ const checkAuth = require('../auth/checkAuthentication');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/img/profilepictures/');
+        cb(null, './public/img/profilepictures/');
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + path.extname(file.originalname));
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
 
 const multerFilter = (req, file, cb) => {
     if (file.mimetype.startsWith('image')) {
-      cb(null, true);
+        cb(null, true);
     } else {
-      cb(new AppError('Not an image! Please upload an image.', 400), false);
+        cb(new AppError('Not an image! Please upload an image.', 400), false);
     }
 };
 
@@ -48,16 +49,28 @@ router.get('/', checkAuth, (req, res, next) => {
 });
 
 router.post('/profilePic', upload.single('profilePic'), (req, res, next) => {
-            console.log(req.file);
-            let profilePath = `/img/profilepictures/${req.file.filename}`;
-            const { profilePic } = req.body;
-            console.log(profilePic);
-            let cookieId = req.session.user.id;
-            db.User.update({ picture: profilePath }, { returning: true, where: { id: cookieId } }
-                ).then((result) => {
-                    console.log(result);
-                    res.redirect('/profile')
-            });
+    console.log(req.file);
+    let profilePath = `/img/profilepictures/${req.file.filename}`;
+    const { profilePic } = req.body;
+    console.log(profilePic)
+    req.session.user.avatar = profilePath;
+    let cookieId = req.session.user.id;
+    Jimp.read(req.file.path)
+        .then(img => {
+            return img
+                // .scaleToFit(400, 400)
+                .resize(100, 100) // resize
+                .quality(60) // set JPEG quality
+                .write(`./public/img/profilepictures/${req.file.filename}`); // save
+        })
+        .catch(err => {
+            console.error(err);
+        });
+    db.User.update({ picture: profilePath }, { returning: true, where: { id: cookieId } }
+    ).then((result) => {
+        console.log(result);
+        res.redirect('/profile')
+    });
 });
 
 //todo implement changing pw 
