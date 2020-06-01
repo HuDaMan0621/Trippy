@@ -1,14 +1,16 @@
+import cookieSession from "cookie-session";
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon'); //require favicon
 const path = require('path');
-
-
-// import favicon from 'serve-favicon';
-
 var router = express.Router();
+
+const cookie_secret = process.env.COOKIE_SECRET;
+
+
 
 const bcrypt = require('bcrypt');
 const app = express();
@@ -23,14 +25,16 @@ const profileRouter = require('./routes/profile');
 const searchRouter = require('./routes/search');
 const likeRouter = require('./routes/like');
 
-const PORT = process.env.PORT || 3000;
+//test route
+const test = require('./routes/test');
+
+//route to github login
+const oauth = require('./routes/oauth');
+
+const PORT = process.env.PORT || 9000;
 
 app.set('view engine', 'ejs');
-
-
-
-
-
+app.set("img", path.join(__dirname, "img"));
 
 //favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -39,16 +43,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// app.use(
+//     session({
+//         secret: 'secret',
+//         resave: false,
+//         saveUninitialized: false, // if set to true a cookie will be created no matter what
+//         cookie: {
+//             // secure: true, 
+//             maxAge: 6000000000000000000000000000,
+//         }
+//     }));
+
+
 app.use(
-    session({
-        secret: 'secret',
-        resave: false,
-        saveUninitialized: false, // if set to true a cookie will be created no matter what
-        cookie: {
-            // secure: true, 
-            maxAge: 6000000000000000000000000000,
-        }
-    }));
+    cookieSession({
+        secret: cookie_secret
+    })
+);
+//test route
+app.use('/test', test);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -57,6 +70,9 @@ app.use('/post', postRouter);
 app.use('/profile', profileRouter);
 app.use('/search', searchRouter);
 app.use('/like', likeRouter);
+
+//use oauth route
+app.use('/oauth', oauth);
 
 // app.get('/homepage', checkAuthentication, (req, res) => {
 //     res.send({ message: 'WELCOME TO THE DASHBOARD!!' });

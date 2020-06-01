@@ -24,8 +24,11 @@ var upload = multer({ storage: storage })
 
 /* GET the homepage. */
 router.get('/', checkAuth, (req, res, next) => {
+    console.log('testeststestsetst')
     db.User.findByPk(req.session.user.id)
         .then((results) => {
+            console.log(results)
+            console.log(req.session.user.id)
             res.render('../Views/profile.ejs', {
                 title: 'profile',
                 user: req.session.user.username,
