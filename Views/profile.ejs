@@ -57,13 +57,15 @@
         <div class="row">
           <div class="col m-3">
             <div class="border" style="width: 100px; height: 100px">avatar</div>
-            user: <h2><%= userData.username %></h2>
+            user: <h2><%= user %></h2>
             <br>
             email: <h3><%= userData.email %></h3>
             <br>
             registered: <h5><%= userData.createdAt.toDateString() %></h5>
           </div>
-          <div class="col m-3 my-auto">
+          <% if (userData.username.startsWith('github') ) { %>
+         <%} else { %> 
+            <div class="col m-3 my-auto">
             <form class="form" action="/profile/newPassword" method="post">
               <h3>Update User Password</h3>
               <label for="currentPassword">Enter Your Current Password</label>
@@ -76,6 +78,8 @@
                 </div>
             </form>
           </div>
+          <% } %>
+          
         </div>
 
       </div>
