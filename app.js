@@ -72,7 +72,7 @@ app.use('/search', searchRouter);
 app.use('/like', likeRouter);
 
 //use oauth route
-app.use('/login/github', oauth);
+app.use('/oauth', oauth);
 
 // app.get('/homepage', checkAuthentication, (req, res) => {
 //     res.send({ message: 'WELCOME TO THE DASHBOARD!!' });

@@ -1,5 +1,7 @@
 
 import fetch from 'node-fetch';
+const db = require('../models');
+
 
 var express = require('express');
 
@@ -15,15 +17,15 @@ console.log({ client_id, client_secret });
 
 //try to get the hello to work
 router.get('/login/github', (req, res) => {
-    res.send('hello')
-    // const url = `http://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:9000/login/github/callback`
-    // res.redirect(url)
+    // res.send('hello')
+    const url = `http://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:9000/oauth/login/github/callback`
+    res.redirect(url)
 })
 // try to get the hello to work
 // router.get('/login/github', (req, res) => {
 //     // res.send('hello')
 //     // const url = `http://github.com/login/oauth/authorize?client_id=Iv1.943166cb5a459840&redirect_uri=http://localhost:9000/login/github/callback`
-//     res.render(`http://github.com/login/oauth/authorize?client_id=Iv1.943166cb5a459840&redirect_uri=http://localhost:9000/login/github/callback`);
+//     res.render(`http://github.com/login/oauth/authorize?client_id=Iv1.943166cb5a459840&redirect_uri=http://localhost:9000/oauth/login/github/callback`);
 // })
 // router.get('/', function (req, res, next) {
 //     // res.send('hello');
@@ -33,7 +35,7 @@ router.get('/login/github', (req, res) => {
 // });
 
 async function getAccessToken(code) {
-    const res = await fetch('http://github.com/login/oauth/access_token', {
+    const res = await fetch('https://github.com/login/oauth/access_token', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -45,12 +47,13 @@ async function getAccessToken(code) {
         })
     })
     const data = await res.text()
+    console.log(res, code);
     const params = new URLSearchParams(data)
     return params.get('access_token')
 }
 
 async function getGithubUser(access_token) {
-    const req = await fetch('http://api.github.com/user', {
+    const req = await fetch('https://api.github.com/user', {
         headers: {
             Authorization: `bearer ${access_token}`
         }
@@ -66,9 +69,21 @@ router.get('/login/github/callback', async (req, res) => {
     const githubData = await getGithubUser(token);
     // res.json(githubData);
     if (githubData) {
-        req.session.githubId = githubData.id
-        req.session.token = token
-        res.redirect('/admin')
+        db.User.findOrCreate({
+            where: { 
+                username: `github:${githubData.id}`
+            },
+            defaults: {
+                username: `github:${githubData.id}`,
+                email: githubData.email
+            }
+        }) .then (User => {
+            req.session.githubId = githubData.id
+            req.session.token = token
+            req.session.user = User
+            req.session.user.githubData = githubData
+            res.redirect('/homepage')
+        })
     } else {
         console.log("Error")
         res.send('Error happened')
