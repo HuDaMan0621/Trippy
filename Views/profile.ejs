@@ -63,7 +63,9 @@
             <br>
             registered: <h5><%= userData.createdAt.toDateString() %></h5>
           </div>
-          <div class="col m-3 my-auto">
+          <% if (userData.username.startsWith('github') ) { %>
+         <%} else { %> 
+            <div class="col m-3 my-auto">
             <form class="form" action="/profile/newPassword" method="post">
               <h3>Update User Password</h3>
               <label for="currentPassword">Enter Your Current Password</label>
@@ -76,6 +78,8 @@
                 </div>
             </form>
           </div>
+          <% } %>
+          
         </div>
 
       </div>
