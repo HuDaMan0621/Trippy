@@ -1,9 +1,26 @@
-var express = require('express');
-var router = express.Router();
 const Sequelize = require('sequelize');
 const db = require('../models')
 const bcrypt = require('bcrypt');
+var express = require('express');
+var router = express.Router();
+var Jimp = require('jimp');
 
+
+// image upload
+// upload an image
+const fs = require('fs');
+const path = require('path');
+var multer = require('multer')
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/img/contentsImages/');
+    },
+    // By default, multer removes file extensions so let's add them back
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+});
+var upload = multer({ storage: storage })
 const sequelize = new Sequelize('travelblog',
     'postgres',
     'postgres', {
@@ -25,12 +42,16 @@ const checkAuth = require('../auth/checkAuthentication');
 
 router.post('/comment/new', checkAuth, (req, res, next) => {
     contentId = req.body.blogid;
-    // console.log(req.body.blogid);
+    console.log(req.session.user.id)
+    console.log(req.session.user.username)
+    console.log(req.session.user);
+    console.log(req.session.user.avatar)
     db.Comments.create({
         UserId: req.session.user.id,
         ContentId: req.body.blogid,
         body: req.body.commentbody,
         content_id: req.session.user.username,
+        avatar: req.session.user.avatar
     }
     )
         .then(() => {
@@ -54,6 +75,7 @@ router.get('/id/:id', (req, res, next) => {
                 db.Comments.findAll( // get the comments
                     { where: { ContentId: req.params.id }, order: [["createdAt", "DESC"]] })
                     .then((allComments) => {
+                        console.log(allComments);
                         res.render('../Views/fullpost.ejs', {
                             title: blogPost.dataValues.title,
                             user: '',
@@ -65,6 +87,7 @@ router.get('/id/:id', (req, res, next) => {
                             author: blogPost.user_id,
                             authorId: blogPost.UserId,
                             userData: userData,
+                            img: blogPost.img_path,
                             avatar: userData.picture
                         })
                     })
@@ -81,25 +104,45 @@ router.get('/', checkAuth, (req, res, next) => {
     });
 });
 
+
+
 // post a new blog entry, private route, to post you must have gone through above route and therefor have access to the private page
-router.post('/new', (req, res, next) => {
-    // console.log(req.session.user.id)
+router.post('/new', upload.single('img_path'), (req, res, next) => {
+    console.log(req.file);
+
+    Jimp.read(req.file.path)
+        .then(img => {
+            return img
+                .scaleToFit(400, 400)
+                // .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .write(`./public/img/contentsImages/${req.file.filename}`); // save
+        })
+        .catch(err => {
+            console.error(err);
+        });
     db.Contents.create({
         UserId: req.session.user.id,
         title: req.body.title,
         body: req.body.body,
         user_id: req.session.user.username,
-        // fts: to_tsvector('english', req.body.body),
+        img_path: `/img/contentsImages/${req.file.filename}`,
+        date: Date.now(),
     }).then((result) => {
         console.log(result);
         sequelize.query(`UPDATE "Contents" SET fts = to_tsvector('english', '${result.title}') || to_tsvector('english', '${result.body}') WHERE "id" = '${result.id}'`)
             .then(() => {
-                res.send(result);
+                res.redirect('/homepage');
             });
     })
-}
-)
+});
 
+router.post('/img', upload.single('img_path'), (req, res, next) => {
+    console.log(req.file.path);
+    db.Contents.update({
+        img_path: req.file.path,
+    })
+});
 
 
 
