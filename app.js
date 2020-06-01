@@ -71,8 +71,11 @@ app.use('/profile', profileRouter);
 app.use('/search', searchRouter);
 app.use('/like', likeRouter);
 
-//use oauth route
+
 app.use('/oauth', oauth);
+
+
+app.use(express.static("public"))
 
 // app.get('/homepage', checkAuthentication, (req, res) => {
 //     res.send({ message: 'WELCOME TO THE DASHBOARD!!' });

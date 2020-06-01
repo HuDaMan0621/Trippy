@@ -56,35 +56,49 @@
       <div class="col-md-8 card shadow m-3">
         <div class="row">
           <div class="col m-3">
-            <div class="border" style="width: 100px; height: 100px">avatar</div>
+            <div class="border" style="width: 100px; height: 100px">
+                  <img src="../<%= avatar %>">
+            </div>
             user: <h2><%= user %></h2>
             <br>
             email: <h3><%= userData.email %></h3>
             <br>
             registered: <h5><%= userData.createdAt.toDateString() %></h5>
           </div>
-          <% if (userData.username.startsWith('github') ) { %>
-         <%} else { %> 
-            <div class="col m-3 my-auto">
-            <form class="form" action="/profile/newPassword" method="post">
-              <h3>Update User Password</h3>
-              <label for="currentPassword">Enter Your Current Password</label>
-              <input class="form-control" type="currentPassword" id="currentPassword" name="currentPassword" required />
-              <div>
-                <label for="newPassword">Change Your Password</label>
-                <input class="form-control" type="newPassword" id="newPassword" name="newPassword" required />
-                <div>
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
-                </div>
-            </form>
-          </div>
-          <% } %>
-          
-        </div>
+          <form class="form" action="/profile/profilePic" method="post" enctype="multipart/form-data">
+            <div class="">
+              <label for="profilePic">Profile Picture URL</label>
+              <input type="file" class="form-control-file" name="profilePic" id="profilePic">
+            </div>
+            <div class="">
+              <button type="submit">Register Picture</button>
+            </div>
+          </form>
 
+          <div class="col m-3 my-auto">
+            <% if (userData.username.startsWith('github') ) { %>
+            <%} else { %>
+            <div class="col m-3 my-auto">
+              <form class="form" action="/profile/newPassword" method="post">
+                <h3>Update User Password</h3>
+                <label for="currentPassword">Enter Your Current Password</label>
+                <input class="form-control" type="currentPassword" id="currentPassword" name="currentPassword"
+                  required />
+                <div>
+                  <label for="newPassword">Change Your Password</label>
+                  <input class="form-control" type="newPassword" id="newPassword" name="newPassword" required />
+                  <div>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+                  </div>
+              </form>
+            </div>
+            <% } %>
+
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
 

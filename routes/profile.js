@@ -2,14 +2,38 @@ var express = require('express');
 var router = express.Router();
 const db = require('../models')
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+const multer = require('multer');
+const path = require('path');
+const ExifImage = require('exif');
+
 
 // require Authentication
 const checkAuth = require('../auth/checkAuthentication');
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/img/profilepictures/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith('image')) {
+      cb(null, true);
+    } else {
+      cb(new AppError('Not an image! Please upload an image.', 400), false);
+    }
+};
+
+
+var upload = multer({ storage: storage, fileFilter: multerFilter });
 
 /* GET the homepage. */
 router.get('/', checkAuth, (req, res, next) => {
-    console.log('testeststestsetst')
+    console.log(req.session.user.picture);
     db.User.findByPk(req.session.user.id)
         .then((results) => {
             console.log(results)
@@ -17,9 +41,23 @@ router.get('/', checkAuth, (req, res, next) => {
             res.render('../Views/profile.ejs', {
                 title: 'profile',
                 user: req.session.user.username,
-                userData: results
+                userData: results,
+                avatar: results.picture
             });
         })
+});
+
+router.post('/profilePic', upload.single('profilePic'), (req, res, next) => {
+            console.log(req.file);
+            let profilePath = `/img/profilepictures/${req.file.filename}`;
+            const { profilePic } = req.body;
+            console.log(profilePic);
+            let cookieId = req.session.user.id;
+            db.User.update({ picture: profilePath }, { returning: true, where: { id: cookieId } }
+                ).then((result) => {
+                    console.log(result);
+                    res.redirect('/profile')
+            });
 });
 
 //todo implement changing pw 

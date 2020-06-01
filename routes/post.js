@@ -65,6 +65,7 @@ router.get('/id/:id', (req, res, next) => {
                             author: blogPost.user_id,
                             authorId: blogPost.UserId,
                             userData: userData,
+                            avatar: userData.picture
                         })
                     })
             })
