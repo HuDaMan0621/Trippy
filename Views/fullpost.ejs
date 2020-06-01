@@ -59,7 +59,9 @@
             <div class="col border rounded py-3 text-center sticky-top">
 
                 <h3><%= userData.username %></h3>
-                <div class="col border mx-auto" style="height: 100px; width: 100px;">avatar</div>
+                <div class="col border mx-auto" style="height: 100px; width: 100px;">
+                    <img src="../../<%= avatar %>">
+                </div>
                 <small><%= userData.location %></small>
                 <br>
                 <small>user since <%= userData.createdAt.getFullYear() %></small>
