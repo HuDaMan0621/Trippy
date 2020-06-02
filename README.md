@@ -18,7 +18,8 @@ Begin by registering, or allow GitHub to authenticate you
 
 <img src = "https://media.giphy.com/media/PmdNber5snMBnA7181/giphy.gif">
 
-![Login with Git](./public/img/gitlogin.png) (./public/img/gitlogin2.png)
+![Login with Git](./public/img/gitlogin.png) 
+![Login with Git2](./public/img/gitlogin2.png)
 
 Once authenticated, create a post about your travels!  Include a title, the location, a photo and your thoughts and tips on traveling to this destination.   Trippy will automatically handle resizing your image to a suitable size.
 
