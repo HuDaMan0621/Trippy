@@ -58,7 +58,7 @@
         <div class="col-lg-2 my-3 mx-auto">
             <div class="col border rounded py-3 text-center sticky-top">
 
-                <h3><%= userData.username %></h3>
+                <h3><%= user %></h3>
                 <div class="col border mx-auto" style="height: 100px; width: 100px;">avatar</div>
                 <small><%= userData.location %></small>
                 <br>
@@ -78,7 +78,6 @@
                     <hr>
                     <p class="card-text"><%- body %></p>
 
-                    <!-- !auth -->
                     <% if (auth == false) { %>
                     <% if (likes > 1) { %>
                     <a href="/like/<%= id %>" class="btn btn-outline-primary disabled"><%= likes %> <i

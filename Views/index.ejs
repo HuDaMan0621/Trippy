@@ -24,7 +24,7 @@
             height: 100%;
 
             object-fit: cover;
-            
+
             /* Center and scale the image nicely */
             background-position: center;
             background-repeat: no-repeat;
@@ -33,83 +33,81 @@
     </style>
 </head>
 
-<body>
-    <div class="bg">
-        <div class="container">
-            <div class="row justify-content-center mt-5">
-                <div class="col-md-8">
-                    <div class="row bg-light shadow mt-5">
-                        <div class="col-md-5 m-3">
-                            <form class="form" action="/users" method="post">
-                                <!-- Register -->
-                                <h2>Register</h2>
-                                <div>
-                                    <label for="username">Username</label>
-                                    <input class="form-control" type="text" id="username" name="username" required>
-                                </div>
-                                <div>
-                                    <label for="email">Email</label>
-                                    <input class="form-control" type="email" id="email" name="email" required>
-                                </div>
-                                <div>
-                                    <label for="password">Password</label>
-                                    <input class="form-control" type="password" id="password" name="password"
-                                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,25}$"
-                                        required>
-                                    <span><em>
-                                            <ul style="font-size: 0.2rem;">
-                                                <li>
-                                                    Minium 6 Characters
-                                                </li>
-                                                <li>
-                                                    At least 1 uppercase letter (A-Z)
-                                                </li>
-                                                <li>
-                                                    At least 1 special characters (!@#$%^&*)
-                                                </li>
-                                                <li>
-                                                    At least 1 number (0-9)
-                                                </li>
-                                                <li>
-                                                    A least 1 lowercase letter (a-z)
-                                                </li>
-                                            </ul>
-                                        </em>
-                                    </span>
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary" type="submit">Register</button>
-                                </div>
-                            </form>
-
-                        </div>
-                        <div class="col-md-5 m-3">
-                            <!-- login -->
-                            <form class="form" action="/users/login" method="post">
-                                <h2>Login</h2>
-                                <div>
-                                    <label for="username"> Username</label>
-                                    <input class="form-control" type="text" id="username" name="username" required />
-                                </div>
-
-                                <label for="password"> Password</label>
-                                <input class="form-control" type="password" id="password" name="password" required />
-                                <div>
-                                    <button class="btn btn-primary" type="submit">Login</button>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                    <!-- oauth with GitHub -->
-                    <div class="border-secondary fab fa-github">
-                        <form class="form" action="oauth/login/github" method="get">
-                        <button class="signInGit" id="signInGit" name="signInGit" type="submit"><i
-                                class="icon-github"></i> Sign in with
-                            GitHub</button>
+<body class="bg">
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="row bg-light shadow mt-5">
+                    <div class="col-md-5 m-3">
+                        <form class="form" action="/users" method="post">
+                            <!-- Register -->
+                            <h2>Register</h2>
+                            <div>
+                                <label for="username">Username</label>
+                                <input class="form-control" type="text" id="username" name="username" required>
+                            </div>
+                            <div>
+                                <label for="email">Email</label>
+                                <input class="form-control" type="email" id="email" name="email" required>
+                            </div>
+                            <div>
+                                <label for="password">Password</label>
+                                <input class="form-control" type="password" id="password" name="password"
+                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,25}$"
+                                    required>
+                                <span><em>
+                                        <ul style="font-size: 0.2rem;">
+                                            <li>
+                                                Minium 6 Characters
+                                            </li>
+                                            <li>
+                                                At least 1 uppercase letter (A-Z)
+                                            </li>
+                                            <li>
+                                                At least 1 special characters (!@#$%^&*)
+                                            </li>
+                                            <li>
+                                                At least 1 number (0-9)
+                                            </li>
+                                            <li>
+                                                A least 1 lowercase letter (a-z)
+                                            </li>
+                                        </ul>
+                                    </em>
+                                </span>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" type="submit">Register</button>
+                            </div>
                         </form>
 
                     </div>
+                    <div class="col-md-5 m-3">
+                        <!-- login -->
+                        <form class="form" action="/users/login" method="post">
+                            <h2>Login</h2>
+                            <div>
+                                <label for="username"> Username</label>
+                                <input class="form-control" type="text" id="username" name="username" required />
+                            </div>
+
+                            <label for="password"> Password</label>
+                            <input class="form-control" type="password" id="password" name="password" required />
+                            <div>
+                                <button class="btn btn-primary" type="submit">Login</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <!-- oauth with GitHub -->
+                <div class="border-secondary fab fa-github">
+                    <form class="form" action="oauth/login/github" method="get">
+                        <button class="signInGit" id="signInGit" name="signInGit" type="submit"><i
+                                class="icon-github"></i> Sign in with
+                            GitHub</button>
+                    </form>
+
                 </div>
             </div>
         </div>

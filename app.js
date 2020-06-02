@@ -104,13 +104,13 @@ router.post('/', (req, res) => {
 
 
 //routes
-app.get('/index', (req, res) => {
-    res.send('Hello@@@@');
-    // res.json(result);
-    // db.Artist.findAll().then((result) => {
-    //     res.json(result);
-    // })
-})
+// app.get('/index', (req, res) => {
+//     res.send('Hello@@@@');
+//     // res.json(result);
+//     // db.Artist.findAll().then((result) => {
+//     //     res.json(result);
+//     // })
+// })
 
 // db.sequelize.sync();
 app.listen(PORT, () => console.log(`The Server is running on Http://localhost:${PORT}`));

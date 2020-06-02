@@ -124,10 +124,10 @@ router.get("/admin", (req, res) => {
     }
 });
 
-router.get('/logout', (req, res) => {
-    req.session = null
-    res.redirect('/') //redirect to the home page
-})
+// router.get('/logout', (req, res) => {
+//     req.session = null
+//     res.redirect('/') //redirect to the home page
+// })
 
 
 module.exports = router;

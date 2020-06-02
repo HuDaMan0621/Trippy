@@ -63,8 +63,9 @@ router.post('/login', (req, res) => {
     })
 })
 
+//so when the logout is called, this part of the code is listening for the command. then it will log the user out and redirects to the homepage or where / is
 router.get('/logout', (req, res) => {
-  req.session.destroy();
+  req.session = null ;
   res.redirect('/');
 })
 module.exports = router;

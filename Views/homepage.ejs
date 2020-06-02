@@ -41,7 +41,8 @@
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./users/logout">Logout</a>
+                    <!-- the ./users/logout route is pointing to routes folder, and in side routes, we have the routers that listens for the commands calling it -->
+                    <a class="nav-link" href="./users/logout">Logout</a>  
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
