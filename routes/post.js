@@ -134,7 +134,7 @@ router.post('/new', upload.single('img_path'), (req, res, next) => {
         date: Date.now(),
     }).then((result) => {
         console.log(result);
-        sequelize.query(`UPDATE "Contents" SET fts = to_tsvector('english', '${result.title}') || to_tsvector('english', '${result.body}') WHERE "id" = '${result.id}'`)
+        sequelize.query(`UPDATE "Contents" SET fts = to_tsvector('english', '${result.title}') || to_tsvector('english', '${result.body}') || to_tsvector('english', '${result.location}') WHERE "id" = '${result.id}'`)
             .then(() => {
                 res.redirect('/homepage');
             });
