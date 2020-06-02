@@ -58,7 +58,7 @@
         <div class="col-lg-2 my-3 mx-auto">
             <div class="col border rounded py-3 text-center sticky-top bg-light">
 
-                <h3><%= author %></h3>
+                <h3 style="font-size: small;"><%= author %></h3>
                 <div class="col mx-auto">
                     <img src="../../<%= avatar %>"
                         onerror="if (this.src != 'default.jpg') this.src = '../../img/default.jpg';">
@@ -111,7 +111,7 @@
                     <small> </small>
                 </div>
             </div>
-            <h3 class="m-3 ml-5">Comments</h3>
+            <h3 class="m-3 ml-5" style="font-size: small" >Comments</h3>
             <% comments.forEach(comment => { %>
             <div class="card shadow my-1 mx-auto bg-light" style="width: 75vw">
                 <div class="card-body mt-1">
@@ -141,7 +141,7 @@
 
             <% if (auth == true) { %>
             <div class="comment">
-                <h3 class="m-3 ml-5">Post a Comment</h3>
+                <h3 class="m-3 ml-5" style="font-size: small;">Post a Comment</h3>
                 <div class="card shadow my-1 mx-auto bg-light" style="width: 75vw">
                     <div class="card-body">
                         <div id="comment-form">
