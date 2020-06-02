@@ -1,5 +1,6 @@
 
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 const db = require('../models');
 
 

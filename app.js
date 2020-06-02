@@ -1,5 +1,5 @@
-import cookieSession from "cookie-session";
-
+// import cookieSession from "cookie-session";
+const cookieSession = require('cookie-session');
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -115,6 +115,6 @@ app.get('/index', (req, res) => {
     // })
 })
 
-// db.sequelize.sync();
+db.sequelize.sync();
 app.listen(PORT, () => console.log(`The Server is running on Http://localhost:${PORT}`));
 
