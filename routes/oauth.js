@@ -69,6 +69,7 @@ router.get('/login/github/callback', async (req, res) => {
     const token = await getAccessToken(code)
     const githubData = await getGithubUser(token);
     // res.json(githubData);
+    console.log(githubData);
     if (githubData) {
         db.User.findOrCreate({
             where: {
@@ -89,13 +90,9 @@ router.get('/login/github/callback', async (req, res) => {
             req.session.user.githubData = githubData
             req.session.user.username = githubData.login
 
-            console.log('test starting here !!!!!!!!!!!!!!!!!!!!!!!')
             console.log(req.session.user.username)
-            console.log('test starting we need this to print !!!!!!!!!!!!!!!!!!!!!!!')
-            console.log(req.session.user.id)
-
-            // console.log(req.session.user)
-            // console.log(User.id)
+            console.log(githubData.id);
+            console.log(githubData.login)
 
             res.redirect('/homepage')
         })

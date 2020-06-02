@@ -64,13 +64,10 @@
                         onerror="if (this.src != 'default.jpg') this.src = '../../img/default.jpg';">
                 </div>
                 <small><%= userData.location %></small>
-                <br>
-                <small>user since <%= userData.createdAt.getFullYear() %></small>
                 <hr>
-
-                <a href="#">Profile</a>
+                <small>user since <%= userData.createdAt.getFullYear() %></small>
                 <br>
-                <a href="/search/id/<%= userData.username %>">Posts</a> <!-- pass in a name -->
+                <a href="/search/id/<%= author %>">Posts</a> <!-- pass in a name -->
             </div>
         </div>
         <div class="col-lg-10">
