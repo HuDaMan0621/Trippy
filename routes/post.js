@@ -78,7 +78,7 @@ router.get('/id/:id', (req, res, next) => {
                     { where: { ContentId: req.params.id }, order: [["createdAt", "DESC"]] })
                     .then((allComments) => {
                         console.log(allComments);
-                        res.render('../Views/fullpost.ejs', {
+                        res.render('fullpost.ejs', {
                             title: blogPost.dataValues.title,
                             user: '',
                             body: blogPost.body,
@@ -100,7 +100,7 @@ router.get('/id/:id', (req, res, next) => {
 
 // get the homepage route, private route authentication required
 router.get('/', checkAuth, (req, res, next) => {
-    res.render('../Views/post.ejs', {
+    res.render('post.ejs', {
         title: 'New Post',
         user: req.session.user.username,
         // user: req.session.user || null,
