@@ -31,7 +31,7 @@ const test = require('./routes/test');
 //route to github login
 const oauth = require('./routes/oauth');
 
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 5000;
 
 app.set('view engine', 'ejs');
 app.set("img", path.join(__dirname, "img"));
