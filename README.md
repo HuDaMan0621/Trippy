@@ -18,7 +18,7 @@ Begin by registering, or allow GitHub to authenticate you
 
 <img src = "https://media.giphy.com/media/PmdNber5snMBnA7181/giphy.gif">
 
-![Login with Git](./public/img/post.png)
+![Login with Git](./public/img/gitlogin.png)
 
 Once authenticated, create a post about your travels!  Include a title, the location, a photo and your thoughts and tips on traveling to this destination.   Trippy will automatically handle resizing your image to a suitable size.
 
@@ -26,7 +26,7 @@ Once authenticated, create a post about your travels!  Include a title, the loca
 
 Once submitted, you will be redirected to your Homepage.  Here the latest posts are displayed.  You can quickly view the posts titles, locations author and likes!  Clicking 'View Full Post' displays the full content along with the posts image.
 
-![full page post](./public/img/fullpost.png)
+![full page post](./public/img/full.png)
 
 Here you are able to view the authors chosen avatar as well as links to view the rest of their posts. Bellow, the comments for that post are displayed. If you have been authenticated, posting comments will be available.  This option is not available to users who have not registered with our database or have been authenticated through GitHub.
 
