@@ -39,7 +39,7 @@ router.get('/', checkAuth, (req, res, next) => {
         .then((results) => {
             console.log(results)
             console.log(req.session.user.id)
-            res.render('../Views/profile.ejs', {
+            res.render('profile.ejs', {
                 title: 'profile',
                 user: req.session.user.username,
                 userData: results,
