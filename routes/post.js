@@ -46,14 +46,16 @@ router.post('/comment/new', checkAuth, (req, res, next) => {
     console.log(req.session.user.username)
     console.log(req.session.user);
     console.log(req.session.user.avatar)
-    db.Comments.create({
-        UserId: req.session.user.id,
-        ContentId: req.body.blogid,
-        body: req.body.commentbody,
-        content_id: req.session.user.username,
-        avatar: req.session.user.avatar
-    }
-    )
+    db.User.findByPk(req.session.user.id)
+        .then((userInfo) => {
+            db.Comments.create({
+                UserId: req.session.user.id,
+                ContentId: req.body.blogid,
+                body: req.body.commentbody,
+                content_id: req.session.user.username,
+                avatar: userInfo.picture
+            })
+        })
         .then(() => {
             res.redirect(`/post/id/${contentId}`)
         })
@@ -80,6 +82,7 @@ router.get('/id/:id', (req, res, next) => {
                             title: blogPost.dataValues.title,
                             user: '',
                             body: blogPost.body,
+                            location: blogPost.location,
                             comments: allComments,
                             likes: blogPost.likes,
                             id: blogPost.id,
@@ -127,6 +130,7 @@ router.post('/new', upload.single('img_path'), (req, res, next) => {
         body: req.body.body,
         user_id: req.session.user.username,
         img_path: `/img/contentsImages/${req.file.filename}`,
+        location: req.body.location,
         date: Date.now(),
     }).then((result) => {
         console.log(result);
