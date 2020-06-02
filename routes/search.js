@@ -4,10 +4,12 @@ const Sequelize = require('sequelize');
 const db = require('../models')
 const bcrypt = require('bcrypt');
 const Op = Sequelize.Op;
+const URL = process.env.DATABASE_URL;
+
 const sequelize = new Sequelize('travelblog',
     'postgres',
     'postgres', {
-    host: '127.0.0.1',
+    host: URL,
     dialect: 'postgres',
     logging: console.log,
     freezeTableName: true,
