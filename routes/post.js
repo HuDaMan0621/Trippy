@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var Jimp = require('jimp');
 
+const URL = process.env.DATABASE_URL
 
 // image upload
 // upload an image
@@ -24,7 +25,7 @@ var upload = multer({ storage: storage })
 const sequelize = new Sequelize('travelblog',
     'postgres',
     'postgres', {
-    host: '127.0.0.1',
+    host: URL,
     dialect: 'postgres',
     logging: console.log,
     freezeTableName: true,
