@@ -24,7 +24,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/post">New Post</a>
         </li>
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Following
@@ -34,7 +34,7 @@
             <a class="dropdown-item" href="#">Jonathan</a>
             <a class="dropdown-item" href="#">Ying</a>
           </div>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link disable" href="#">Profile</a>
         </li>
@@ -57,7 +57,7 @@
         <div class="row">
           <div class="col m-3">
             <div class="border" style="width: 100px; height: 100px">
-                  <img src="../<%= avatar %>">
+              <img src="../<%= avatar %>" onerror="if (this.src != 'default.jpg') this.src = '../../img/default.jpg';">
             </div>
             user: <h2><%= user %></h2>
             <br>
@@ -65,7 +65,7 @@
             <br>
             registered: <h5><%= userData.createdAt.toDateString() %></h5>
           </div>
-          <form class="form" action="/profile/profilePic" method="post" enctype="multipart/form-data">
+          <!-- <form class="form" action="/profile/profilePic" method="post" enctype="multipart/form-data">
             <div class="">
               <label for="profilePic">Profile Picture URL</label>
               <input type="file" class="form-control-file" name="profilePic" id="profilePic">
@@ -73,9 +73,9 @@
             <div class="">
               <button type="submit">Register Picture</button>
             </div>
-          </form>
+          </form> -->
 
-          <div class="col m-3 my-auto">
+          <div class="col-7 m-3">
             <% if (userData.username.startsWith('github') ) { %>
             <%} else { %>
             <div class="col m-3 my-auto">
@@ -93,6 +93,16 @@
               </form>
             </div>
             <% } %>
+            <h3>Update Your Avatar</h3>
+            <form class="form" action="/profile/profilePic" method="post" enctype="multipart/form-data">
+              <div class="">
+                <label for="profilePic">Profile Picture URL</label>
+                <input type="file" class="form-control-file form-control" name="profilePic" id="profilePic">
+              </div>
+              <div class="">
+                <button class="btn btn-outline-success" type="submit">Register Picture</button>
+              </div>
+            </form>
 
           </div>
 

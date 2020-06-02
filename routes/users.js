@@ -33,11 +33,11 @@ router.post('/', (req, res) => {
             email,
             password: hash,
           }).then((result) => {
-            res.render('index', { errorMessage: `Welcome ${result.username} please log in` })
+            res.render('index', { errorMessage: `Welcome ${result.username} Please Log In` })
           });
         });
       } else {
-        res.render('index', { errorMessage: 'username or email already in database' })
+        res.render('index', { errorMessage: 'Username or Email Already in Database' })
       }
     })
 })
@@ -55,12 +55,12 @@ router.post('/login', (req, res) => {
           req.session.user = User;
           res.redirect('/homepage');
         } else {
-          res.send('Incorrect Password');
+          res.render('index', { errorMessage: 'Username or Password Incorrect' })
         }
       });
     })
     .catch(() => {
-      res.send('username not found');
+      res.render('index', { errorMessage: 'Username or Password Incorrect' })
     })
 })
 

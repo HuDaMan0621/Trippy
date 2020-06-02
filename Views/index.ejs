@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trippy</title>
-    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -30,15 +29,43 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
+        #page-container {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        #content-wrap {
+            padding-bottom: 2.5rem;
+            /* Footer height */
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 1.5rem;
+            /* Footer height */
+        }
     </style>
 </head>
 
 <body class="bg">
-    <div>
-        <div class="container">
+    <div id="page-container">
+        <div class="container" id="content-wrap">
             <div class="row justify-content-center mt-5">
                 <div class="col-md-8">
-                    <div class="row bg-light shadow mt-5">
+                    <div class="row shadow mt-5 bg-light p-3">
+                        <div class="col-8 my-auto">
+                            <h1>Trippy</h1>
+
+                            a platform to share photos and stories of your adventures
+                        </div>
+                        <div class="col-4 mx-auto">
+                            <img src="img/trippy.png" style="max-height: 150px; max-width: 150px">
+                        </div>
+                    </div>
+                    <div class="row bg-light shadow mt-2">
                         <div class="col-md-5 m-3">
                             <form class="form" action="/users" method="post">
                                 <!-- Register -->
@@ -57,7 +84,7 @@
                                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,25}$"
                                         required>
                                     <span><em>
-                                            <ul style="font-size: 0.2rem;">
+                                            <ul style="font-size: .8rem;">
                                                 <li>
                                                     Minium 6 Characters
                                                 </li>
@@ -118,17 +145,23 @@
                 </div>
             </div>
         </div>
-    </div>
+        <!-- </div> -->
+        <div class="footer text-center bg-light" id="footer">
+            Built by -
+            <a href="https://github.com/HuDaMan0621" target="_blank">Ying Hu</a> -
+            <a href="https://github.com/JackSkiles" target="_blank">Jack Skiles</a> -
+            <a href="https://github.com/jonathancox1" target="_blank">Jonathan Cox</a>
+        </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
