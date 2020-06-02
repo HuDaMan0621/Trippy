@@ -35,6 +35,7 @@ const PORT = process.env.PORT || 9000;
 
 app.set('view engine', 'ejs');
 app.set("img", path.join(__dirname, "img"));
+app.set('views', path.join(__dirname, 'views'));
 
 //favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -81,7 +82,6 @@ app.use(express.static("public"))
 //     res.send({ message: 'WELCOME TO THE DASHBOARD!!' });
 // })
 //users
-// app.set('views', path.join(__dirname, 'views'));
 
 // app.get('/index')
 /* GET users listing. */
