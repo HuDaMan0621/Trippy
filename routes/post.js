@@ -80,7 +80,7 @@ router.get('/id/:id', (req, res, next) => {
                         console.log(allComments);
                         res.render('fullpost.ejs', {
                             title: blogPost.dataValues.title,
-                            user: '',
+                            user: req.session.user.username,
                             body: blogPost.body,
                             location: blogPost.location,
                             comments: allComments,
