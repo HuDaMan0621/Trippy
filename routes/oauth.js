@@ -19,7 +19,7 @@ console.log({ client_id, client_secret });
 //try to get the hello to work
 router.get('/login/github', (req, res) => {
     // res.send('hello')
-    const url = `http://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:9000/oauth/login/github/callback`
+    const url = `http://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:5000/oauth/login/github/callback`
     res.redirect(url)
 })
 // try to get the hello to work
@@ -71,14 +71,14 @@ router.get('/login/github/callback', async (req, res) => {
     // res.json(githubData);
     if (githubData) {
         db.User.findOrCreate({
-            where: { 
+            where: {
                 username: `github:${githubData.id}`
             },
             defaults: {
                 username: `github:${githubData.id}`,
                 email: githubData.email
             }
-        }) .then (User => { //this part checks to see if the user is a github user, 
+        }).then(User => { //this part checks to see if the user is a github user, 
             //if they are, we will use their session information and apply to the profile page.
             req.session.githubId = githubData.id
             console.log(User)
@@ -94,7 +94,7 @@ router.get('/login/github/callback', async (req, res) => {
 
             // console.log(req.session.user)
             // console.log(User.id)
-            
+
             res.redirect('/homepage')
         })
     } else {
