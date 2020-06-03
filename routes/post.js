@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize');
+const {QueryTypes, query, Op} = require('sequelize');
 const db = require('../models')
 const bcrypt = require('bcrypt');
 var express = require('express');
 var router = express.Router();
 var Jimp = require('jimp');
-
+require('dotenv').config();
 const URL = process.env.DATABASE_URL
 
 // image upload
@@ -22,21 +22,21 @@ const storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage })
-const sequelize = new Sequelize('travelblog',
-    'postgres',
-    'postgres', {
-    host: URL,
-    dialect: 'postgres',
-    logging: console.log,
-    freezeTableName: true,
+// const sequelize = new Sequelize('travelblog',
+//     'postgres',
+//     'postgres', {
+//     host: URL,
+//     dialect: 'postgres',
+//     logging: console.log,
+//     freezeTableName: true,
 
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
-})
+//     pool: {
+//         max: 5,
+//         min: 0,
+//         acquire: 30000,
+//         idle: 10000
+//     }
+// })
 
 // require Authentication
 const checkAuth = require('../auth/checkAuthentication');
@@ -135,7 +135,7 @@ router.post('/new', upload.single('img_path'), (req, res, next) => {
         date: Date.now(),
     }).then((result) => {
         console.log(result);
-        sequelize.query(`UPDATE "Contents" SET fts = to_tsvector('english', '${result.title}') || to_tsvector('english', '${result.body}') || to_tsvector('english', '${result.location}') WHERE "id" = '${result.id}'`)
+        db.sequelize.query(`UPDATE "Contents" SET fts = to_tsvector('english', '${result.title}') || to_tsvector('english', '${result.body}') || to_tsvector('english', '${result.location}') WHERE "id" = '${result.id}'`)
             .then(() => {
                 res.redirect('/homepage');
             });
