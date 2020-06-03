@@ -1,27 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const Sequelize = require('sequelize');
+const {QueryTypes, query, Op} = require('sequelize');
 const db = require('../models')
 const bcrypt = require('bcrypt');
-const Op = Sequelize.Op;
+// const Op = Sequelize.Op;
 require('dotenv').config();
-const URL = process.env.DATABASE_URL;
+// const URL = process.env.DATABASE_URL;
 
-const sequelize = new Sequelize('travelblog',
-    'postgres',
-    'postgres', {
-    host: URL,
-    dialect: 'postgres',
-    logging: console.log,
-    freezeTableName: true,
+// const sequelize = new Sequelize('travelblog',
+//     'postgres',
+//     'postgres', {
+//     host: URL,
+//     dialect: 'postgres',
+//     logging: console.log,
+//     freezeTableName: true,
 
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
-})
+//     pool: {
+//         max: 5,
+//         min: 0,
+//         acquire: 30000,
+//         idle: 10000
+//     }
+// })
 
 
 
@@ -37,7 +37,7 @@ router.post('/', (req, res, next) => {
         res.send('no input entered');
     }
     console.log(input);
-    sequelize.query(`SELECT * FROM "Contents" WHERE (fts @@ plainto_tsquery('english', '%${input}%')) OR (user_id iLike '%${input}%')`, { type: sequelize.QueryTypes.SELECT })
+    db.sequelize.query(`SELECT * FROM "Contents" WHERE (fts @@ plainto_tsquery('english', '%${input}%')) OR (user_id iLike '%${input}%')`, { type: QueryTypes.SELECT })
         .then((results) => {
             console.log(results)
             res.render('./homepage', {
