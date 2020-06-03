@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 const db = require('../models')
 const bcrypt = require('bcrypt');
 const Op = Sequelize.Op;
+require('dotenv').config();
 const URL = process.env.DATABASE_URL;
 
 const sequelize = new Sequelize('travelblog',

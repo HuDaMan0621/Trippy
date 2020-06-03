@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon'); //require favicon
 const path = require('path');
 var router = express.Router();
-
+require('dotenv').config();
 const cookie_secret = process.env.COOKIE_SECRET;
 
 

@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 var express = require('express');
 var router = express.Router();
 var Jimp = require('jimp');
-
+require('dotenv').config();
 const URL = process.env.DATABASE_URL
 
 // image upload
