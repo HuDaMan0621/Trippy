@@ -1,6 +1,6 @@
 # Trippy
 A mobile first  built web app designed to share your adventures.  Users first log in through our database or with a GitHub account.  Once verified the user is able to make a post about a location they've traveled to, comment on others journeys or browse by destination.  
-[View the app here](https://jonathancoxbootstrap.netlify.app/)
+[View the app here](https://trippy-blog.herokuapp.com/)
 
 ## Developer Team
 - Ying Hu - [LinkedIn]([https://www.linkedin.com/in/yingx-hu/](https://www.linkedin.com/in/yingx-hu/)) - [GitHub](https://github.com/HuDaMan0621)
